@@ -34,6 +34,7 @@ exports.deactivate = deactivate;
 // 模块 'vscode' 包含了 VS Code 的可扩展性 API
 // 导入该模块并在代码中引用别名 vscode
 const vscode = __importStar(__webpack_require__(1));
+const fs = __webpack_require__(2);
 // 
 // 
 /**
@@ -58,6 +59,16 @@ function activate(context) {
         // 每次命令执行时都会执行此处的代码
         // 向用户界面右下角显示一个警告框
         vscode.window.showWarningMessage(`${Date().toLocaleString()}`);
+        vscode.window.showTextDocument(fs.readFileSync('./command/showTime.ts'));
+    });
+    vscode.commands.registerCommand('How.cowsay', async () => {
+        // let what = await vscode.window.showInputBox({ placeHolder: 'cow say?' });
+        let what = '../README.md';
+        if (what) {
+            let uri = vscode.Uri.parse(what);
+            let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
+            await vscode.window.showTextDocument(doc, { preview: false });
+        }
     });
     // 插件context的subscriptions是一个数组，用于存储可释放资源的对象（即实现了 dispose 方法的对象）。
     // 当此扩展被停用时，这些可释放资源将被释放。
@@ -75,6 +86,12 @@ function deactivate() { }
 /***/ ((module) => {
 
 module.exports = require("vscode");
+
+/***/ }),
+/* 2 */
+/***/ ((module) => {
+
+module.exports = require("fs");
 
 /***/ })
 /******/ 	]);

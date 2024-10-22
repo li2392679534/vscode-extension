@@ -20,6 +20,10 @@
       {
         "command": "How.showTimer",
         "title": "How Time"
+      },
+      {
+        "command": "How.cowsay",
+        "title": "cowsay"
       }
     ]                                                     
   },
