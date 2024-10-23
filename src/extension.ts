@@ -34,6 +34,7 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('How.cowsay', async () => {
         // let what = await vscode.window.showInputBox({ placeHolder: 'cow say?' });
         let what = '../README.md';
+        console.log(what);
         if (what) {
           let uri = vscode.Uri.parse(what);
           let doc = await vscode.workspace.openTextDocument(uri); // calls back into the provider
